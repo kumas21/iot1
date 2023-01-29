@@ -1,0 +1,51 @@
+vcc--------2
+gnd--------6
+data/pin----16
+led(+ve)------18
+led(-ve)------20(gnd)
+
+
+
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BOARD)
+
+pir_pin = 16
+led=18
+GPIO.setup(pir_pin, GPIO.IN)
+GPIO.setup(led,GPIO.OUT)
+while True:
+    if GPIO.input(pir_pin):
+        GPIO.output(led, 1)
+        print("Motion detected!")
+    else:
+        GPIO.output(led, 0)
+    time.sleep(0.5)
+
+
+
+
+<<<NEWW>>>
+
+
+import RPi.GPIO as GPIO
+import time
+
+# set up GPIO using BCM numbering
+GPIO.setmode(GPIO.BCM)
+
+# set up pin for PIR sensor as input
+PIR_PIN = 4
+GPIO.setup(PIR_PIN, GPIO.IN)
+
+while True:
+    # read the value from the PIR sensor
+    pir_value = GPIO.input(PIR_PIN)
+    if pir_value == 1:
+        # motion detected
+        print("Motion detected")
+    else:
+        # no motion detected
+        print("No motion detected")
+    time.sleep(0.5)

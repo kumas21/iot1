@@ -1,0 +1,89 @@
+	Connection for transmitter:
+  
+•	3.3 V -----  3.3 V
+•	GND ------  GND
+•	CSN ------   Pin 10
+•	CE -------    Pin 9
+•	MOSI ----- Pin 11
+•	SCK ------   Pin 13
+•	MISO ------  Pin 12
+
+	Code for Transmitter
+	
+    #include <SPI.h>
+    #include <nRF24L01.h>
+    #include <RF24.h>
+    RF24 radio(9, 10); // CE, CSN         
+    const byte address[6] = "00001";     
+    int button_pin = 2;
+    boolean button_state = 0;
+    void setup() {
+    pinMode(button_pin, INPUT);
+    radio.begin();                  
+    radio.openWritingPipe(address); 
+    radio.setPALevel(RF24_PA_MIN);  
+    radio.stopListening();  
+    }
+    void loop()
+    {
+    button_state = digitalRead(button_pin);
+    if(button_state == HIGH)
+    {
+    const char text[] = "Your Button State is HIGH";
+    radio.write(&text, sizeof(text));                  
+    }
+    else
+    {
+    const char text[] = "Your Button State is LOW";
+    radio.write(&text, sizeof(text));                  
+    }
+    radio.write(&button_state, sizeof(button_state));  
+    delay(1000); }
+
+	Connection for Receiver:
+•	3.3 V -----  3.3 V
+•	GND ------  GND
+•	CSN ------   Pin 10
+•	CE -------    Pin 9
+•	MOSI ----- Pin 11
+•	SCK ------   Pin 13
+•	MISO ------ Pin 12
+
+
+	Code for Receiver:
+  
+  
+ #include <SPI.h>
+    #include <nRF24L01.h>
+    #include <RF24.h>
+    RF24 radio(9, 10); // CE, CSN
+    const byte address[6] = "00001";
+    boolean button_state = 0;
+    int led_pin = 3;
+    void setup() {
+    pinMode(6, OUTPUT);
+    Serial.begin(9600);
+    radio.begin();
+    radio.openReadingPipe(0, address);   
+    radio.setPALevel(RF24_PA_MIN);       
+    radio.startListening();              
+    }
+    void loop()
+    {
+    if (radio.available())              
+    {
+    char text[32] = "";                 
+    radio.read(&text, sizeof(text));    
+    radio.read(&button_state, sizeof(button_state));    
+    if(button_state == HIGH)
+    {
+    digitalWrite(6, HIGH);
+    Serial.println(text);
+    }
+    else
+    {
+    digitalWrite(6, LOW);
+    Serial.println(text);}
+    }
+    delay(5);
+    }

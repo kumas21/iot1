@@ -1,0 +1,24 @@
+	LED blinking using ESP8266:
+	Components:
+•	ESP8266
+•	Arduino IDE
+	Steps:
+•	Open Arduino IDE, Open preferences window from Arduino IDE. Go to File -> Preferences.
+•	Enter the URL “http://arduino.esp8266.com/stable/package_esp8266com_index.json” into Additional Board Manager URLs field and click the “OK” button
+•	Open Boards Manager. Go to Tools -> Board -> Boards Manager
+•	Search for ESP8266 and press install button for the “ESP8266 by ESP8266 Community “
+•	Choose your ESP8266 board from Tools > Board > Generic ESP8266 Module
+
+code:
+
+void setup() {
+// initialize digital pin LED_BUILTIN as an output.
+pinMode(LED_BUILTIN, OUTPUT);
+}
+// the loop function runs over and over again forever
+void loop() {
+digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level)
+delay(1000); // wait for a second
+digitalWrite(LED_BUILTIN, LOW); // turn the LED off by making the voltage LOW
+delay(1000); // wait for a second
+}

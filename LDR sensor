@@ -1,0 +1,38 @@
+vcc-----pin 2
+gnd-----pin 6
+data/pin---------16
+
+
+import RPi.GPIO as GPIO
+import time
+
+data = 16 
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(data, GPIO.IN)
+
+try:
+    while True:
+        print(GPIO.input(data))
+        time.sleep(0.5)  
+except KeyboardInterrupt:
+    GPIO.cleanup()
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>
+
+import RPi.GPIO as GPIO
+import time
+
+# set up GPIO using BCM numbering
+GPIO.setmode(GPIO.BCM)
+
+# set up pin for LDR sensor as input
+LDR_PIN = 4
+GPIO.setup(LDR_PIN, GPIO.IN)
+
+while True:
+    # read the value from the LDR sensor
+    ldr_value = GPIO.input(LDR_PIN)
+    print("LDR value:", ldr_value)
+    time.sleep(0.5)
+

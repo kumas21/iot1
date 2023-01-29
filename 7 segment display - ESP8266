@@ -1,0 +1,134 @@
+#include <ESP8266WiFi.h>
+//const char* ssid = "Your SSID";
+//const char* password = "Your Wifi Password";
+//Seven segment pins attachecd with nodemcu pins
+int a = 0; //Gpio-0 with a of 7 segment display
+int b = 1; //Gpio-1 with b of 7 segment display
+int c = 2; //Gpio-2 with c of 7 segment display
+int d = 3; //Gpio-3 with d of 7 segment display
+int e = 4; //Gpio-4 with e of 7 segment display
+int f = 5; //Gpio-5 with f of 7 segment display
+int g = 16; //Gpio-16 with g of 7 segment display
+void setup() {
+ // initialize digital pin LED_BUILTIN as an output.
+ pinMode(a, OUTPUT);
+ pinMode(b, OUTPUT);
+ pinMode(c, OUTPUT);
+ pinMode(d, OUTPUT);
+ pinMode(e, OUTPUT);
+ pinMode(f, OUTPUT);
+ pinMode(g, OUTPUT);
+}
+void loop() {
+ digitalWrite(a, LOW);
+ delay(250);
+ digitalWrite(b, LOW);
+ delay(250);
+ digitalWrite(c, LOW);
+ delay(250);
+ digitalWrite(d, LOW);
+ delay(250);
+ digitalWrite(e, LOW);
+ delay(250);
+ digitalWrite(f, LOW);
+ delay(250);
+ digitalWrite(g, LOW);
+ delay(250);
+ digitalWrite(a,HIGH);
+ digitalWrite(b,HIGH);
+ digitalWrite(c,HIGH);
+ digitalWrite(d,HIGH);
+ digitalWrite(e,HIGH);
+ digitalWrite(f,HIGH);
+ digitalWrite(g,HIGH);
+ delay(250);
+ digitalWrite(a, HIGH);
+ digitalWrite(b, HIGH);
+ digitalWrite(c, HIGH);
+ digitalWrite(d, HIGH); //Displaying 1
+ digitalWrite(e, LOW);
+ digitalWrite(f, LOW);
+ digitalWrite(g, HIGH);
+ delay(250);
+ digitalWrite(a, LOW);
+ digitalWrite(b, LOW);
+ digitalWrite(c, HIGH); //Displaying 2
+ digitalWrite(d, LOW);
+ digitalWrite(e, LOW);
+ digitalWrite(f, HIGH);
+ digitalWrite(g, LOW);
+ delay(250);
+ digitalWrite(a, LOW);
+ digitalWrite(b, LOW);
+ digitalWrite(c, HIGH); //Displaying 2
+ digitalWrite(d, LOW);
+ digitalWrite(e, LOW);
+ digitalWrite(f, HIGH);
+ digitalWrite(g, LOW);
+ delay(250);
+ digitalWrite(a, LOW);
+ digitalWrite(b, LOW);
+ digitalWrite(c, LOW);
+ digitalWrite(d, LOW); //Displaying 3
+ digitalWrite(e, HIGH);
+ digitalWrite(f, HIGH);
+ digitalWrite(g, LOW);
+ delay(250);
+ digitalWrite(a, HIGH);
+ digitalWrite(b, LOW);
+ digitalWrite(c, LOW);
+ digitalWrite(d, HIGH);
+ digitalWrite(e, HIGH); //Displaying 4
+ digitalWrite(f, LOW);
+ digitalWrite(g, LOW);
+ delay(250);
+ digitalWrite(a, LOW);
+ digitalWrite(b, HIGH);
+ digitalWrite(c, LOW);
+ digitalWrite(d, LOW);
+ digitalWrite(e, HIGH); //Displaying 5
+ digitalWrite(f, LOW);
+ digitalWrite(g, LOW);
+ delay(250);
+ digitalWrite(a, LOW);
+ digitalWrite(b, HIGH);
+ digitalWrite(c, LOW);
+ digitalWrite(d, LOW); //Displaying 6
+ digitalWrite(e, LOW);
+ digitalWrite(f, LOW);
+ digitalWrite(g, LOW);
+ delay(250);
+ digitalWrite(a, LOW);
+ digitalWrite(b, LOW);
+ digitalWrite(c, LOW);
+ digitalWrite(d, HIGH);
+ digitalWrite(e, HIGH); //Displaying 7
+ digitalWrite(f, HIGH);
+ digitalWrite(g, HIGH);
+ delay(250);
+ digitalWrite(a, LOW);
+ digitalWrite(b, LOW);
+ digitalWrite(c, LOW);
+ digitalWrite(d, HIGH);
+ digitalWrite(e, HIGH); //Displaying 7
+ digitalWrite(f, HIGH);
+ digitalWrite(g, HIGH);
+ delay(250);
+ digitalWrite(a, LOW);
+ digitalWrite(b, LOW);
+ digitalWrite(c, LOW);
+ digitalWrite(d, HIGH);
+ digitalWrite(e, HIGH); //Displaying 9
+ digitalWrite(f, LOW);
+ digitalWrite(g, LOW);
+ delay(250);
+ digitalWrite(a,HIGH);
+ digitalWrite(b,HIGH);
+ digitalWrite(c,HIGH);
+ digitalWrite(d,HIGH);
+ digitalWrite(e,HIGH);
+ digitalWrite(f,HIGH);
+ digitalWrite(g,HIGH);
+ delay(250);
+
+}

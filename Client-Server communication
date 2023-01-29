@@ -1,0 +1,50 @@
+--------Server---------
+
+import socket
+
+# Create a server socket
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Bind the socket to a specific IP address and port
+server_socket.bind(("localhost", 12345))
+
+# Start listening for incoming connections
+server_socket.listen(5)
+
+# Wait for incoming connections
+while True:
+    # Accept a client connection
+    client_socket, client_address = server_socket.accept()
+
+    # Receive data from the client
+    data = client_socket.recv(1024)
+
+    # Send data back to the client
+    client_socket.send(data)
+
+    # Close the client socket
+    client_socket.close()
+    
+    
+    
+    ----------Client------------
+    
+import socket
+
+# Create a client socket
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Connect to the server
+client_socket.connect(("localhost", 12345))
+
+# Send data to the server
+client_socket.send("Hello Server")
+
+# Receive data from the server
+data = client_socket.recv(1024)
+
+# Print the received data
+print("Received from server:", data)
+
+# Close the client socket
+client_socket.close()

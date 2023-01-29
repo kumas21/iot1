@@ -1,0 +1,15 @@
+https://github.com/binaryupdates/aws-raspberrypi
+
+
+
+--------steps----------
+
+* AWS->IoT Core->All devices->Things->Create new thing->Auto generate certificate->create policy->Thing created
+* Download certificate,RootCA, Private&public key and keep them in a single folder
+* Go to security->Certificates->select that->actions->attach to thing & policy
+* Open Python code->Paste Certificate name, private key, RootCA and endpoint(Settings in AWS)
+* Connect to Raspberry pi using SSH <username>@<ipaddress>
+* Copy the files to Raspberry pi using scp <path of file in windows> <username>@<ipaddress> <path in raspsberry>
+* pip install paho-mqtt
+* Run the python code and we'll get an output
+* MQTT test client->device data (MQTT.fx is an MQTT test client)

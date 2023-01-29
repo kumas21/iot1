@@ -1,0 +1,120 @@
+•	Trig Pin   -----   GPIO 11(pin 23)
+•	Echo Pin  ------ GPIO 12(Pin 32)
+•	5V    ---------------   5V
+•	GND   -----------   GND
+
+
+	Code:
+  
+import RPI.GPIO as GPIO
+import time
+GPIO.setmode (GPIO.BOARD)
+TRIG_PIN=23
+ECHO_PIN=32
+GPIO.setup(TRIG_PIN,GPIO.OUT)
+GPIO.setup(ECHO_PIN,GPIO.IN) 
+GPIO.output(TRIG_PIN,GPIO.LOW) 
+time.sleep(2)
+GPIO.output(TRIG_PIN,GPIO.HIGH) 
+time.sleep(0.00001)
+GPIO.output(TRIG_PIN,GPIO.LOW) 
+while GPIO.input(ECHO_PIN)==0:
+    pulse_send=time.time()
+while GPIO.input(ECHO_PIN)==1: 
+    pulse_received=time.time() 
+pulse_duration=pulse_received - pulse_send
+distance = round(pulse_duration * 17150, 2) 
+
+print (f"Distance: {distance} cm") 
+
+GPIO.cleanup()
+
+
+<<<<<<<<<<<<<new>>>>>>>>>>>>>>
+
+
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO_TRIGGER = 18
+GPIO_ECHO = 24
+
+GPIO.setup(GPIO_TRIGGER , GPIO.OUT)
+GPIO.setup(GPIO_ECHO, GPIO.IN)
+
+def distance():
+    GPIO.output(GPIO_TRIGGER, True )
+    time.sleep(0.00001)
+    GPIO.output(GPIO_TRIGGER, False )
+    
+    starttime = time.time()
+    stoptime = time.time()
+    
+    while GPIO.input(GPIO_ECHO)==0:
+        starttime = time.time()
+    
+    while GPIO.input(GPIO_ECHO)==1:
+        stoptime = time.time()
+    
+    timeescaped = stoptime - starttime
+    
+    distance = (timeescaped * 34300) /2
+    return distance
+
+if __name__ == '__main__':
+    try:
+        while True:
+            dist = distance()
+            print(f'Measured distance = {round(dist)}')
+            # add the requets code here + imported
+            time.sleep(0.2)
+        
+    except KeyboardInterrupt:
+        print('why you stopped ???????????????????')
+        GPIO.cleanup()
+
+
+
+<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>
+
+
+
+import RPi.GPIO as GPIO
+import time
+
+# set up GPIO using BCM numbering
+GPIO.setmode(GPIO.BCM)
+
+# set up pins for ultrasonic sensor
+TRIG = 23
+ECHO = 24
+GPIO.setup(TRIG, GPIO.OUT)
+GPIO.setup(ECHO, GPIO.IN)
+
+while True:
+    # set TRIG to low
+    GPIO.output(TRIG, False)
+    time.sleep(0.1)
+
+    # send trigger pulse
+    GPIO.output(TRIG, True)
+    time.sleep(0.00001)
+    GPIO.output(TRIG, False)
+
+    # wait for echo start
+    while GPIO.input(ECHO) == 0:
+        pulse_start = time.time()
+
+    # wait for echo end
+    while GPIO.input(ECHO) == 1:
+        pulse_end = time.time()
+
+    # calculate distance
+    pulse_duration = pulse_end - pulse_start
+    distance = pulse_duration * 17150
+    distance = round(distance, 2)
+
+    print("Distance:", distance, "cm")
+    time.sleep(0.5)

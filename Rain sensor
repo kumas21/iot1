@@ -1,0 +1,59 @@
+•	VCC   ----------   5V (Pin 2/Pin 4)
+•	GND --------     GND (Pin 6) 
+•	DATA    ------    GPIO 23 (Pin 16)
+•	Cathode of Buzzer -------  GND (Pin 20)
+•	Anode of Buzzer --------    GPIO 24 (Pin 18)
+	
+	Code:
+import RPi.GPIO as GPIO
+import time
+
+sensor = 16
+buzzer = 18
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(sensor, GPIO.IN)
+GPIO.setup(buzzer, GPIO.OUT)
+
+try:
+    while True:
+        i = GPIO.input(sensor)
+
+        if i == 0:
+            print("No rain", i)
+            GPIO.output(buzzer, 0)
+            time.sleep(0.1)
+
+        elif i == 1:
+            print("Rain detected", i)
+            GPIO.output(buzzer, 1)
+            time.sleep(0.1)
+
+except KeyboardInterrupt:
+    GPIO.cleanup()
+
+
+<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>
+
+import RPi.GPIO as GPIO
+import time
+
+# set up GPIO using BCM numbering
+GPIO.setmode(GPIO.BCM)
+
+# set up pin for Rain sensor as input
+RAIN_PIN = 17
+GPIO.setup(RAIN_PIN, GPIO.IN)
+
+while True:
+    # read the value from the Rain sensor
+    rain_value = GPIO.input(RAIN_PIN)
+    if rain_value == 0:
+        # Rain detected
+        print("Rain detected")
+    else:
+        # No Rain detected
+        print("No Rain detected")
+    time.sleep(0.5)
+
