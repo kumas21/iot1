@@ -1,0 +1,71 @@
+<<<<<<<<<<<<<<<<<<Transmitter>>>>>>>>>>>>>>>>
+
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+
+// Set up the radio object
+RF24 radio(7, 8);  // CE, CSN pins
+
+// Set up the radio address
+const byte address[5] = { 0xE8, 0xE8, 0xF0, 0xF0, 0xE1 };
+
+void setup() {
+  // Start the serial communication
+  Serial.begin(9600);
+
+  // Set up the radio
+  radio.begin();
+  radio.openWritingPipe(address);
+  radio.setPALevel(RF24_PA_MIN);
+  radio.stopListening();
+}
+
+void loop() {
+  // Read input from the serial
+  if (Serial.available() > 0) {
+    String message = Serial.readString();
+
+    // Send the message over the radio
+    radio.write(message.c_str(), message.length());
+    Serial.println("Sent: " + message);
+  }
+}
+
+
+
+<<<<<<<<<<<<<<<<<<<<Reciever>>>>>>>>>>>>>>>>>>>>
+
+
+
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+
+// Set up the radio object
+RF24 radio(7, 8);  // CE, CSN pins
+
+// Set up the radio address
+const byte address[5] = { 0xE8, 0xE8, 0xF0, 0xF0, 0xE1 };
+
+void setup() {
+  // Start the serial communication
+  Serial.begin(9600);
+
+  // Set up the radio
+  radio.begin();
+  radio.openReadingPipe(1, address);
+  radio.setPALevel(RF24_PA_MIN);
+  radio.startListening();
+}
+
+void loop() {
+  // Check for received message
+  if (radio.available()) {
+    // Read the received message
+    char message[32];
+    radio.read(&message, sizeof(message));
+    Serial.print("Received: ");
+    Serial.println(message);
+  }
+}
