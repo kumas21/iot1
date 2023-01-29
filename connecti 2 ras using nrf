@@ -1,0 +1,74 @@
+##trasmitter side
+
+import RPi.GPIO as GPIO
+from lib_nrf24 import NRF24
+import time
+
+# set up GPIO using BCM numbering
+GPIO.setmode(GPIO.BCM)
+
+# set up NRF24L01+ radio module
+radio = NRF24(GPIO, 25, 0)
+
+# set up radio address
+address = [0xE8, 0xE8, 0xF0, 0xF0, 0xE1]
+
+# set up radio as PTX (transmitter)
+radio.begin(0, 22, 25)
+radio.setRetries(15,15)
+radio.setPayloadSize(32)
+radio.setChannel(0x60)
+radio.setDataRate(NRF24.BR_1MBPS)
+radio.setPALevel(NRF24.PA_MIN)
+radio.setAutoAck(True)
+radio.openWritingPipe(address)
+radio.stopListening()
+
+while True:
+    # get input from user
+    message = input("Enter message to send: ")
+    # convert message to bytes
+    message_bytes = bytes(message, 'utf-8')
+    # send message to other Raspberry Pi
+    radio.write(message_bytes)
+    print("Sent: {}".format(message))
+    time.sleep(1)
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<Reciever>>>>>>>>>>>>>>>>>
+
+import RPi.GPIO as GPIO
+from lib_nrf24 import NRF24
+import time
+
+# set up GPIO using BCM numbering
+GPIO.setmode(GPIO.BCM)
+
+# set up NRF24L01+ radio module
+radio = NRF24(GPIO, 25, 0)
+
+# set up radio address
+address = [0xE8, 0xE8, 0xF0, 0xF0, 0xE1]
+
+# set up radio as PRX (receiver)
+radio.begin(0, 22, 25)
+radio.setRetries(15,15)
+radio.setPayloadSize(32)
+radio.setChannel(0x60)
+radio.setDataRate(NRF24.BR_1MBPS)
+radio.setPALevel(NRF24.PA_MIN)
+radio.setAutoAck(True)
+radio.openReadingPipe(1, address)
+radio.startListening()
+
+while True:
+    # check for received message
+    if radio.available():
+        # read received message
+        received_message = []
+        radio.read(received_message, radio.getDynamicPayloadSize())
+        # convert received message to string
+        message = "".join([chr(x) for x in received_message])
+        print("Received: {}".format(message))
+    time.sleep(0.1)
