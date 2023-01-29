@@ -1,3 +1,11 @@
+•	GND ------  GND
+•	CSN ------   Pin 10
+•	CE -------    Pin 9
+•	MOSI ----- Pin 11
+•	SCK ------   Pin 13
+•	MISO ------  Pin 12
+
+
 <<<<<<<<<<<<<<<<<<Transmitter>>>>>>>>>>>>>>>>
 
 #include <SPI.h>
