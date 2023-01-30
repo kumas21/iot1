@@ -1,0 +1,21 @@
+sudo su -
+yum update -y
+yum install -y httpd
+mkdir temp
+cd temp
+vi sample.html
+copy paste html code
+
+mv * /var/www/html
+cd /var/www/html
+systemctl status httpd
+  "        enable   "
+   "       start    "
+"          status  "
+
+
+
+
+
+nikhilambadi444@gmail.com
+pass: cHETANbHAGAT@4
